@@ -27,11 +27,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/searchBar"
+                android:id="@+id/etSearchBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_rounded_search_bar"
@@ -46,6 +46,7 @@
                 android:layout_marginTop="12dp">
 
                 <TextView
+                    android:id="@+id/tvAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_rounded_text_active"
@@ -56,10 +57,14 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="4dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp"
                     android:text="Favorit"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -67,12 +72,21 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMedicine"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
-                tools:itemCount="2"
+                tools:itemCount="0"
                 tools:listitem="@layout/item_list_medicine" />
+
+            <TextView
+                android:id="@+id/tvEmptyData"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="100dp"
+                android:text="Obat tidak ditemukan"
+                android:textColor="@android:color/darker_gray" />
 
         </LinearLayout>
 

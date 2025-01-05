@@ -13,10 +13,7 @@ class MedicineViewModel: ViewModel() {
     val medicines: LiveData<List<Medicine>> = _medicines
 
     private val _searchQuery = MutableLiveData("")
-    val searchQuery: LiveData<String> = _searchQuery
-
     private val _showFavoritesOnly = MutableLiveData(false)
-    val showFavoritesOnly: LiveData<Boolean> = _showFavoritesOnly
 
     init {
         loadMedicines()
@@ -30,10 +27,6 @@ class MedicineViewModel: ViewModel() {
         _searchQuery.value = query
     }
 
-    fun toggleFavoritesOnly() {
-        _showFavoritesOnly.value = !_showFavoritesOnly.value!!
-    }
-
     fun toggleFavorite(medicine: Medicine) {
         _medicines.value = _medicines.value?.map {
             if (it.id == medicine.id) it.copy(isFavorited = !it.isFavorited) else it
@@ -43,10 +36,15 @@ class MedicineViewModel: ViewModel() {
     fun getFilteredMedicines(): List<Medicine> {
         val query = _searchQuery.value?.lowercase() ?: ""
         val showFavorites = _showFavoritesOnly.value ?: false
-
-        return _medicines.value?.filter { medicine ->
+        val result = _medicines.value?.filter { medicine ->
             (!showFavorites || medicine.isFavorited) &&
                     (query.isEmpty() || medicine.name.lowercase().contains(query))
         } ?: emptyList()
+
+        return result
     }
+}
+
+enum class Category {
+    ALL, FAVORITES
 }
